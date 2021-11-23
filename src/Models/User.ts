@@ -7,7 +7,7 @@ import {
   OneToMany,
   PrimaryColumn,
 } from "typeorm";
-import Task from "./Task";
+
 import bcrypt from "bcryptjs";
 
 @Entity("User")
@@ -28,14 +28,6 @@ class User extends BaseEntity {
   @Column()
   @Field()
   password: string;
-
-  @OneToMany(() => Task, (task) => task.user)
-  tasks: Task[];
-
-  @BeforeInsert()
-  async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 12);
-  }
 }
 
 export default User;

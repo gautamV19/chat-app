@@ -4,18 +4,16 @@ import { buildSchema } from "type-graphql";
 import dotenv from "dotenv";
 import { createConnection } from "typeorm";
 
-import TaskResolver from "./Resolvers/Task";
 import UserResolver from "./Resolvers/User";
 import { decodeUser } from "./helper/extrafunctions";
 import authChecker from "./helper/authChecker";
 import User from "./Models/User";
-import Task from "./Models/Task";
 
 dotenv.config({ path: "./config.env" });
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [TaskResolver, UserResolver],
+    resolvers: [UserResolver],
     authChecker: authChecker,
   });
   const server = new ApolloServer({
@@ -38,7 +36,7 @@ createConnection({
   url: process.env.DATABASE_URL,
   synchronize: true,
   logging: true,
-  entities: [User, Task],
+  entities: [User],
 })
   .then(() => {
     console.log("Database Connected");
