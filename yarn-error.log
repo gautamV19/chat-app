@@ -1,8 +1,8 @@
 Arguments: 
-  /opt/homebrew/Cellar/node/17.0.1/bin/node /opt/homebrew/bin/yarn add @types/typeorm
+  /opt/homebrew/Cellar/node/17.0.1/bin/node /opt/homebrew/bin/yarn add bycryptjs
 
 PATH: 
-  /opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin:/opt/homebrew/bin
+  /opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin
 
 Yarn version: 
   1.22.17
@@ -14,7 +14,7 @@ Platform:
   darwin arm64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2ftypeorm: Not found
+  Error: https://registry.yarnpkg.com/bycryptjs: Not found
       at Request.params.callback [as _callback] (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:67029:18)
       at Request.self.callback (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:140883:22)
       at Request.emit (node:events:390:28)
@@ -35,9 +35,10 @@ npm manifest:
     "author": "Gautam Vaja13",
     "license": "MIT",
     "scripts": {
-      "dev": "ts-node-dev --respawn index.ts"
+      "dev": "ts-node-dev --respawn src/index.ts"
     },
     "dependencies": {
+      "@types/bcryptjs": "^2.4.2",
       "@types/jsonwebtoken": "^8.5.5",
       "@types/node": "^16.11.6",
       "apollo-server": "^3.4.0",
@@ -232,6 +233,11 @@ Lockfile:
     integrity sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==
     dependencies:
       "@types/node" "*"
+  
+  "@types/bcryptjs@^2.4.2":
+    version "2.4.2"
+    resolved "https://registry.yarnpkg.com/@types/bcryptjs/-/bcryptjs-2.4.2.tgz#e3530eac9dd136bfdfb0e43df2c4c5ce1f77dfae"
+    integrity sha512-LiMQ6EOPob/4yUL66SZzu6Yh77cbzJFYll+ZfaPiPPFswtIlA/Fs1MzdKYA7JApHU49zQTbJGX3PDmCpIdDBRQ==
   
   "@types/body-parser@*", "@types/body-parser@1.19.1":
     version "1.19.1"

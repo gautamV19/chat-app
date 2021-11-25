@@ -4,7 +4,7 @@ import { buildSchema } from "type-graphql";
 import dotenv from "dotenv";
 import { createConnection } from "typeorm";
 
-import UserResolver from "./Resolvers/User";
+import UserResolver from "./Resolvers/UserResolver";
 import { decodeUser } from "./helper/extrafunctions";
 import authChecker from "./helper/authChecker";
 import User from "./Models/User";

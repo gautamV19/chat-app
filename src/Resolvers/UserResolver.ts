@@ -14,7 +14,6 @@ import { CreateUserInput } from "../helper/input";
 import jwt from "jsonwebtoken";
 import MyContext from "../helper/context";
 import bcrypt from "bcryptjs";
-import cuid from "cuid";
 
 @ObjectType()
 class LoginOutput {
@@ -36,7 +35,6 @@ class UserResolver {
   @UseMiddleware()
   async createUser(@Arg("data") createUserInput: CreateUserInput) {
     const user = User.create({
-      id: cuid(),
       name: createUserInput.name,
       email: createUserInput.email,
       password: createUserInput.password,

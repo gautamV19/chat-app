@@ -1,21 +1,25 @@
 import { Field, ObjectType } from "type-graphql";
 import {
   BaseEntity,
-  BeforeInsert,
   Column,
   Entity,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  ManyToMany,
+  JoinColumn,
   OneToMany,
-  PrimaryColumn,
 } from "typeorm";
-
 import bcrypt from "bcryptjs";
+import Group from "./group";
+import Message from "./message";
 
 @Entity("User")
 @ObjectType("User")
 class User extends BaseEntity {
   @Field()
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
+  // todo how to use cuid here
 
   @Column()
   @Field()
@@ -28,6 +32,20 @@ class User extends BaseEntity {
   @Column()
   @Field()
   password: string;
+
+  @ManyToMany(() => Group, (group) => group.users)
+  @JoinColumn()
+  @Field()
+  groups: Group[];
+
+  @OneToMany(() => Message, (message) => message.user)
+  @Field()
+  messages: Message[];
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 12);
+  }
 }
 
 export default User;
