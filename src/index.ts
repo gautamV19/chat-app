@@ -5,9 +5,9 @@ import dotenv from "dotenv";
 import { createConnection } from "typeorm";
 
 import UserResolver from "./Resolvers/UserResolver";
-import { decodeUser } from "./helper/extrafunctions";
-import authChecker from "./helper/authChecker";
 import User from "./Models/User";
+import Message from "./Models/Message";
+import Group from "./Models/Group";
 
 dotenv.config({ path: "./config.env" });
 
@@ -17,7 +17,6 @@ const main = async () => {
   });
   const server = new ApolloServer({
     schema,
-    context: decodeUser,
   });
 
   server
@@ -35,7 +34,7 @@ createConnection({
   url: process.env.DATABASE_URL,
   synchronize: true,
   logging: true,
-  entities: [User],
+  entities: [User, Group, Message],
 })
   .then(() => {
     console.log("Database Connected");

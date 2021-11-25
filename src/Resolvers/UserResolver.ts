@@ -1,4 +1,4 @@
-import User from "src/Models/User";
+import User from "../Models/User";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 
 @Resolver()
