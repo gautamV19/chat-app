@@ -25,11 +25,9 @@ class User extends BaseEntity {
 
   @ManyToMany(() => Group, (group) => group.users)
   @JoinColumn()
-  @Field()
   groups: Group[];
 
   @OneToMany(() => Message, (message) => message.user)
-  @Field()
   messages: Message[];
 }
 
