@@ -8,12 +8,13 @@ import UserResolver from "./Resolvers/UserResolver";
 import User from "./Models/User";
 import Message from "./Models/Message";
 import Group from "./Models/Group";
+import groupResolver from "./Resolvers/groupResolver";
 
 dotenv.config({ path: "./config.env" });
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [UserResolver, groupResolver],
   });
   const server = new ApolloServer({
     schema,

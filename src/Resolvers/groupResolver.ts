@@ -1,4 +1,4 @@
-import Group from "src/Models/Group";
+import Group from "../Models/Group";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 
 @Resolver()
