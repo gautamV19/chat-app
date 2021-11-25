@@ -9,7 +9,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Message from "./message";
+import Message from "./Message";
 import User from "./User";
 
 // group name, auto generated id, list of Group in group(use typeorm relations), list of message for this group(use typeorm relations)

@@ -8,8 +8,8 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import Group from "./group";
-import Message from "./message";
+import Group from "./Group";
+import Message from "./Message";
 
 @Entity("User")
 @ObjectType("User")

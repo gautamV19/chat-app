@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Group from "./group";
+import Group from "./Group";
 import User from "./User";
 
 @Entity("Message")

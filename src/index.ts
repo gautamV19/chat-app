@@ -14,7 +14,6 @@ dotenv.config({ path: "./config.env" });
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [UserResolver],
-    authChecker: authChecker,
   });
   const server = new ApolloServer({
     schema,
