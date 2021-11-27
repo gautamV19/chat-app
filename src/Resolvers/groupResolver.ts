@@ -11,31 +11,55 @@ class groupResolver {
   }
 
   @Mutation(() => Boolean)
-  createGroup(@Arg("groupname") name: string) {
-    let group = Group.create({
-      name: name,
-    });
-    group.save();
-
-    return !!group;
+  async createGroup(@Arg("groupname") name: string) {
+    try {
+      let group = Group.create({
+        name: name,
+      });
+      await group.save();
+      return !!group;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
   }
 
   @Mutation(() => Boolean)
   async addMember(
     @Arg("addMemberData") { names, groupId }: AddMemberDataInput
   ) {
-    let group = await Group.findOne({ id: groupId });
+    try {
+      let group = await Group.findOne({ id: groupId });
 
-    names.forEach(async (name) => {
-      let user = await User.findOne({ name: name });
+      names.forEach(async (name) => {
+        let user = await User.findOne({ name: name });
 
-      console.log(user, group);
+        console.log(user, group);
 
-      group?.users.push(user!);
-      group?.save();
-    });
+        group?.users.push(user!);
+        await group?.save();
+      });
 
-    return !!group;
+      let group_updated = await Group.findOne({ id: groupId });
+
+      console.log("group_updated", group_updated, group);
+
+      return !!group_updated;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
+  }
+
+  @Query(() => [Group])
+  async getAllGroups() {
+    try {
+      let groups = await Group.find({});
+      return groups;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
   }
 }
 
