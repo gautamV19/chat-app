@@ -2,6 +2,7 @@ import { Field, ObjectType } from "type-graphql";
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -19,11 +20,10 @@ class Message extends BaseEntity {
 
   @Column()
   @Field()
-  name: string;
-
-  @Column()
-  @Field()
   message: string;
+
+  @CreateDateColumn({ type: "timestamptz" })
+  created_at: Date;
 
   @ManyToOne(() => Group, (group) => group.messages)
   group: Group;

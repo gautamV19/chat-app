@@ -4,17 +4,18 @@ import { buildSchema } from "type-graphql";
 import dotenv from "dotenv";
 import { createConnection } from "typeorm";
 
-import UserResolver from "./Resolvers/UserResolver";
+import userResolver from "./Resolvers/userResolver";
 import User from "./Models/User";
 import Message from "./Models/Message";
 import Group from "./Models/Group";
 import groupResolver from "./Resolvers/groupResolver";
+import messageResolver from "./Resolvers/messageResolver";
 
 dotenv.config({ path: "./config.env" });
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [UserResolver, groupResolver],
+    resolvers: [userResolver, groupResolver, messageResolver],
   });
   const server = new ApolloServer({
     schema,
