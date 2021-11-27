@@ -1,11 +1,11 @@
-import Group from "src/Models/Group";
-import Message from "src/Models/Message";
-import User from "src/Models/User";
+import Group from "../Models/Group";
+import Message from "../Models/Message";
+import User from "../Models/User";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 
 @Resolver()
 class messageResolver {
-  @Query()
+  @Query(() => String)
   greetMessage() {
     return "Jay Swaminarayan from messages";
   }
@@ -16,14 +16,20 @@ class messageResolver {
     @Arg("groupId") groupId: string,
     @Arg("userId") userId: string
   ) {
-    let group = await Group.findOne({ id: groupId });
-    let user = await User.findOne({ id: userId });
-    let message = await Message.create({ message: content });
-
-    group?.messages.push(message);
-    user?.messages.push(message);
-
-    return !!message;
+    try {
+      let group = await Group.findOne({ id: groupId });
+      let user = await User.findOne({ id: userId });
+      let message = Message.create({
+        message: content,
+        group: group,
+        user: user,
+      });
+      await message.save();
+      return !!message;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
   }
 
   @Query(() => [Message])

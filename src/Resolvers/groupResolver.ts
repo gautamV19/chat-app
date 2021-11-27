@@ -1,12 +1,5 @@
 import Group from "../Models/Group";
-import {
-  Arg,
-  FieldResolver,
-  Mutation,
-  Query,
-  Resolver,
-  Root,
-} from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import User from "../Models/User";
 import { AddMemberDataInput } from "../Helpers/input";
 
@@ -15,11 +8,6 @@ class groupResolver {
   @Query(() => String)
   groupGreet() {
     return "Jay Swaminarayan";
-  }
-
-  @FieldResolver()
-  async users(@Root() group: Group) {
-    // let users = await User.find({g});
   }
 
   @Mutation(() => Boolean)
