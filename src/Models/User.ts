@@ -5,8 +5,8 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   ManyToMany,
-  JoinColumn,
   OneToMany,
+  JoinTable,
 } from "typeorm";
 import Group from "./Group";
 import Message from "./Message";
@@ -17,14 +17,13 @@ class User extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn("uuid")
   id: string;
-  // todo how to use cuid here
 
   @Column()
   @Field()
   name: string;
 
   @ManyToMany(() => Group, (group) => group.users)
-  @JoinColumn()
+  @JoinTable()
   groups: Group[];
 
   @OneToMany(() => Message, (message) => message.user)

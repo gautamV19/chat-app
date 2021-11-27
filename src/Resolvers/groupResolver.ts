@@ -1,5 +1,7 @@
 import Group from "../Models/Group";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import User from "../Models/User";
+import { AddMemberDataInput } from "../Helpers/input";
 
 @Resolver()
 class groupResolver {
@@ -14,6 +16,24 @@ class groupResolver {
       name: name,
     });
     group.save();
+
+    return !!group;
+  }
+
+  @Mutation(() => Boolean)
+  async addMember(
+    @Arg("addMemberData") { names, groupId }: AddMemberDataInput
+  ) {
+    let group = await Group.findOne({ id: groupId });
+
+    names.forEach(async (name) => {
+      let user = await User.findOne({ name: name });
+
+      console.log(user, group);
+
+      group?.users.push(user!);
+      group?.save();
+    });
 
     return !!group;
   }

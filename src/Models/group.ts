@@ -19,7 +19,6 @@ class Group extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn("uuid")
   id: string;
-  // todo how to use cuid here
 
   @Column()
   @Field()
@@ -31,7 +30,7 @@ class Group extends BaseEntity {
   @OneToMany(() => Message, (message) => message.group)
   messages: Message[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "timestamptz" })
   created_at: Date;
 }
 
