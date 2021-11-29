@@ -66,9 +66,9 @@ class groupResolver {
   @Query(() => Group)
   async groupDetails(@Arg("groupId") groupId: string) {
     try {
-      let group = await Group.findOne({ id: groupId });
+      let group = await Group.findOne(groupId, {relations:["users"]});
       console.log(group, group?.users);
-      return group;
+      return {...group, users: group?.users};
     } catch (err) {
       console.log(err);
       throw new Error(err);

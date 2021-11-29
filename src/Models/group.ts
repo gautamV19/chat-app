@@ -27,6 +27,7 @@ class Group extends BaseEntity {
 
   @ManyToMany(() => User, (user) => user.groups)
   @JoinTable()
+  @Field(()=>[User])
   users: User[];
 
   @OneToMany(() => Message, (message) => message.group)
