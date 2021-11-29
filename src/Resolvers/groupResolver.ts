@@ -34,12 +34,12 @@ class groupResolver {
     @Arg("addMemberData") { names, groupId }: AddMemberDataInput
   ) {
     try {
-      let group = await Group.findOne({ id: groupId });
+      let group = await Group.findOne( groupId, {relations: ["users"]} );
 
       names.forEach(async (name) => {
         let user = await User.findOne({ name: name });
 
-        console.log(user, group, group?.users);
+        // console.log(user, group, group?.users);
 
         group?.users.push(user!);
       });
