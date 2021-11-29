@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -25,7 +26,7 @@ class Group extends BaseEntity {
   name: string;
 
   @ManyToMany(() => User, (user) => user.groups)
-  @Field(() => [User])
+  @JoinTable()
   users: User[];
 
   @OneToMany(() => Message, (message) => message.group)

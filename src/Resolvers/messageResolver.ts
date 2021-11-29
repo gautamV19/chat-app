@@ -33,8 +33,15 @@ class messageResolver {
   }
 
   @Query(() => [Message])
-  async listOfMessages() {
-    //ToDo: douubt
+  async listOfMessages(@Arg("groupId") groupId: string) {
+    try {
+      let group = await Group.findOne({ id: groupId });
+      console.log("*****messages", group?.messages);
+      return group?.messages;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
   }
 }
 

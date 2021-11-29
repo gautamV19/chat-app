@@ -15,7 +15,12 @@ class groupResolver {
     try {
       let group = Group.create({
         name: name,
+        users: [],
       });
+      let user = await User.findOne({
+        id: "b343503b-50ef-452a-9b90-edf8fe566ea5",
+      });
+      group.users.push(user!);
       await group.save();
       return !!group;
     } catch (err) {
@@ -34,17 +39,13 @@ class groupResolver {
       names.forEach(async (name) => {
         let user = await User.findOne({ name: name });
 
-        console.log(user, group);
+        console.log(user, group, group?.users);
 
         group?.users.push(user!);
-        await group?.save();
       });
+      await group?.save();
 
-      let group_updated = await Group.findOne({ id: groupId });
-
-      console.log("group_updated", group_updated, group);
-
-      return !!group_updated;
+      return !!group;
     } catch (err) {
       console.log(err);
       throw new Error(err);
