@@ -17,11 +17,8 @@ class groupResolver {
         name: name,
         users: [],
       });
-      let user = await User.findOne({
-        id: "b343503b-50ef-452a-9b90-edf8fe566ea5",
-      });
-      group.users.push(user!);
       await group.save();
+
       return !!group;
     } catch (err) {
       console.log(err);
@@ -38,13 +35,11 @@ class groupResolver {
 
       names.forEach(async (name) => {
         let user = await User.findOne({ name: name });
-
         // console.log(user, group, group?.users);
-
         group?.users.push(user!);
       });
       await group?.save();
-
+      console.log(group, group?.users);
       return !!group;
     } catch (err) {
       console.log(err);
@@ -67,7 +62,7 @@ class groupResolver {
   async groupDetails(@Arg("groupId") groupId: string) {
     try {
       let group = await Group.findOne(groupId, {relations:["users"]});
-      console.log(group, group?.users);
+      // console.log(group, group?.users);
       return {...group, users: group?.users};
     } catch (err) {
       console.log(err);

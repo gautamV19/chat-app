@@ -17,8 +17,8 @@ class messageResolver {
     @Arg("userId") userId: string
   ) {
     try {
-      let group = await Group.findOne({ id: groupId });
-      let user = await User.findOne({ id: userId });
+      let group = await Group.findOne(groupId);
+      let user = await User.findOne(userId);
       let message = Message.create({
         message: content,
         group: group,
@@ -35,8 +35,8 @@ class messageResolver {
   @Query(() => [Message])
   async listOfMessages(@Arg("groupId") groupId: string) {
     try {
-      let group = await Group.findOne({ id: groupId });
-      console.log("*****messages", group?.messages);
+      let group = await Group.findOne(groupId, {relations: ["messages"]});
+      // console.log("*****messages", group?.messages);
       return group?.messages;
     } catch (err) {
       console.log(err);
