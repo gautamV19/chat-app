@@ -25,6 +25,7 @@ Resolvers:
     Add more members - Take list of members and group id as input
     Get the list of groups
     Get the group details by id - Return group id, group name, list of members and take group id as input to return the details
+4. Message:
     Add message - Take group id, user id, message as input
     Get the list of message for a group id - Take group id as input
 
