@@ -18,11 +18,11 @@ Entities:
     Created by in message entity and list of messages in User entity
 
 Resolvers:
-Create a user - Take user name as input
-Group:
+1. User:
+    Create a user - Take user name as input
+3. Group:
     Create a group - Take group name, list of members as input
-Add more members - 
-    Take list of members and group id as input
+    Add more members - Take list of members and group id as input
     Get the list of groups
     Get the group details by id - Return group id, group name, list of members and take group id as input to return the details
     Add message - Take group id, user id, message as input
